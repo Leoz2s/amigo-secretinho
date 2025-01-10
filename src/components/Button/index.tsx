@@ -1,9 +1,14 @@
 import { Container } from "./styles";
 
-export function Button() {
+type ButtonProps = {
+  text: string;
+  raffleButton?: true | false;
+};
+
+export function Button({text, raffleButton}: ButtonProps) {
   return(
-    <Container>
-      
+    <Container className={raffleButton ? "raffleButton" : ""} >
+      {text}
     </Container>
   );
 };

@@ -1,5 +1,6 @@
-import { Container, Main } from './styles';
+import { Container, Main, FriendsBox } from './styles';
 import { Header } from '../../components/Header';
+import { Button } from '../../components/Button';
 
 export function Home() {
   
@@ -8,7 +9,14 @@ export function Home() {
       <Header />
 
       <Main>
+        <h2>Lista de Amigos:</h2>
         
+        <FriendsBox>
+          
+        </FriendsBox>
+
+        <Button />
+        <Button />
       </Main>
     </Container>
   );

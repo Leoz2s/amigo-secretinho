@@ -15,6 +15,8 @@ export default {
     TINTS: {
       RED: "#E95656",
       GREEN: "#7FE87F",
+      WHITE: "#FFF",
+      BLACK: "#000",
     },
   },
 };
