@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints.ts";
 
 export const Container = styled.header`
   display: grid;
@@ -26,7 +27,7 @@ export const Logo = styled.div`
   > h1 {
     margin: 0;
 
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: ${({theme}) => theme.COLORS.THEME_900};
   }
@@ -35,5 +36,11 @@ export const Logo = styled.div`
     width: 4rem;
     height: 4rem;
     color: ${({theme}) => theme.COLORS.THEME_900};
+  }
+
+  @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
+    > h1 {
+      font-size: 3rem;
+    }
   }
 `;

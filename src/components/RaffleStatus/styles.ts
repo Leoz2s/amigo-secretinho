@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { DEVICE_BREAKPOINTS } from "../../styles/deviceBreakpoints.ts";
 
 export const Container = styled.div`
   display: grid;
@@ -47,7 +48,7 @@ export const Container = styled.div`
     }
   }
 
-  @media (min-width: 425px) {
+  @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
     width: 41.3rem;
   }
 `;
