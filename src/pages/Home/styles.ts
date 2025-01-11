@@ -15,7 +15,7 @@ export const Main = styled.main`
   gap: 1.7rem;
 
   margin-top: 1.7rem;
-  
+
   > h2 {
     font-family: "Inria Sans", serif;
     font-size: 2.5rem;
@@ -65,5 +65,23 @@ export const FriendsBox = styled.div`
   &:has(h3) {
     display: grid;
     align-content: center;
+  }
+`;
+
+export const RaffleElement = styled.div`
+  display: none;
+
+  &.raffling {
+    display: block;
+
+    position: absolute;
+    margin-top: calc(-1.7rem + -10rem);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    > div {
+      margin: 18.5rem auto;
+    }
   }
 `;
