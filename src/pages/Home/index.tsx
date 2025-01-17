@@ -36,9 +36,9 @@ export function Home() {
             friends[0] == undefined && <h3>Você não tem amigos ainda =(</h3>
           }
         </FriendsBox>
-
+ 
         <Button text="Adicionar novo amigo" />
-        <Button text="Sortear os amigos secretos" raffleButton />
+        <Button text="Sortear os amigos secretos" altButton />
         
         <RaffleElement className={raffleState == "none" ? "" : "raffling"} >
           <RaffleStatus status={raffleState} />

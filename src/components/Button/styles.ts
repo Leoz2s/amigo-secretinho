@@ -9,11 +9,11 @@ export const Container = styled.button`
   background-color: ${({theme}) => theme.COLORS.THEME_600};
   border-radius: 99px;
 
-  color: ${({theme}) => theme.COLORS.THEME_100};
+  color: ${({theme}) => theme.COLORS.TINTS.WHITE};
   font-family: "Inria Sans", serif;
   font-size: 2rem;
 
-  &.raffleButton {
+  &.altButton {
     background-color: ${({theme}) => theme.COLORS.THEME_900};
   }
 `;

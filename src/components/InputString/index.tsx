@@ -10,7 +10,7 @@ export function InputString({label, placeholder}: InputStringProps) {
     <Container>
       <p>{label}</p>
 
-      <input placeholder={placeholder} ></input>
+      <input type="text" placeholder={placeholder} ></input>
     </Container>
   );
 };

@@ -6,7 +6,6 @@ export const Container = styled.div`
   > p {
     color: ${({theme}) => theme.COLORS.TINTS.WHITE};
     font-size: 2rem;
-    
 
     margin-bottom: .8rem;
   }

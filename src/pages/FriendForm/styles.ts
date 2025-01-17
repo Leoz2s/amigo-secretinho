@@ -10,7 +10,11 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   display: grid;
-  justify-content: center;
+  align-content: start;
+  justify-items: center;
+  gap: 2.3rem;
+
+  margin-top: 1.7rem;
 
   font-family: "Inria Sans", serif;
 
@@ -18,7 +22,5 @@ export const Main = styled.main`
     font-size: 2.5rem;
     font-weight: 700;
     color: ${({theme}) => theme.COLORS.TINTS.WHITE};
-
-    margin-block: 1.7rem;
   }
 `;
