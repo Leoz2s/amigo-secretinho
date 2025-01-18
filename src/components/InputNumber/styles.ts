@@ -13,11 +13,15 @@ export const Container = styled.div`
 
   > input {
     width: 29.6rem;
-    padding: 1.4rem 2.1rem;
+    /* padding: 1.4rem 2.1rem; */
+    padding-block: 1.1rem;
     background: none;
     border-radius: 99px;
 
-    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
 
     font-family: "Inria Sans", serif;
     font-size: 2rem;
@@ -27,7 +31,7 @@ export const Container = styled.div`
       color: ${({theme}) => theme.COLORS.THEME_600};
     }
 
-    position: absolute;
+    /* position: absolute;
     width: 1px;
     height: 1px;
     padding: 0;
@@ -35,7 +39,7 @@ export const Container = styled.div`
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
-    border-width: 0;
+    border-width: 0; */
   }
 `;
 
@@ -43,11 +47,6 @@ export const NumberGroup = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-
-  /* position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 0; */
   
   &.placeholder-shown .number-segment {
     color: ${({theme}) => theme.COLORS.THEME_600};

@@ -38,7 +38,7 @@ export function FriendForm() {
         <InputString label="Nome" placeholder='Nome do amigo' />
         <InputString label="Sugestões de presente (Opcional)" placeholder='Sugestões ou dicas de presente' />
         <InputString label="E-mail" placeholder='name@email.com' />
-        <InputNumber label="Número de Celular" placeholder={'+5511987654321'} />
+        <InputNumber label="Número de Celular" placeholder={'5511987654321'} />
 
         <Button text={ editingFriend ? "Atualizar amigo" : "Adicionar amigo"} />
         { 
