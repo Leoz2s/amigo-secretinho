@@ -8,8 +8,10 @@ type InputNumberProps = {
 
 export function InputNumber({label, placeholder}: InputNumberProps) {
   const inputRef = useRef(null);
-  const [formattedNumber, setFormattedNumber] = useState<string[]>([""]);
+  const [formattedPlaceholderNumber, setFormattedPlaceholderNumber] = useState<string[]>([""]);
+  const [formattedNumber, setFormattedNumber] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
+  const [lastKeyPressed, setLastKeyPressed] = useState<string>("");
 
   function handleInputClick() {
     if(inputRef.current) {
@@ -29,16 +31,27 @@ export function InputNumber({label, placeholder}: InputNumberProps) {
     const inputValueWithoutSpaces = e.target.value.replace(/\s/g, "");
     const inputValueAsNumber = Number(inputValueWithoutSpaces);
 
-    if(e.target.value && inputValueWithoutSpaces.length <= 13 && false === Number.isNaN(inputValueAsNumber)) {
+    if(e.target.value && inputValueWithoutSpaces.length <= 13 && false === Number.isNaN(inputValueAsNumber) && lastKeyPressed !== "Backspace") {
+      setFormattedNumber(inputValueWithoutSpaces);
       const numberFormatted = numberFormatter(inputValueWithoutSpaces);
-      setFormattedNumber(numberFormatted);
+      setInputValue(`   ${numberFormatted[0]}         ${numberFormatted[1]}               ${numberFormatted[2]}`);
+    };
+  };
+
+  function handleInputKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+    setLastKeyPressed(e.key);
+    if( e.target && e.key === "Backspace") {
+      const inputValueWithoutSpaces = e.target.value.replace(/\s/g, "");
+      const inputValueWithDeletedNumber = inputValueWithoutSpaces.slice(0, -1);
+      setFormattedNumber(inputValueWithDeletedNumber);
+      const numberFormatted = numberFormatter(inputValueWithDeletedNumber);
       setInputValue(`   ${numberFormatted[0]}         ${numberFormatted[1]}               ${numberFormatted[2]}`);
     };
   };
 
   useEffect(() => {
     const placeholderFormatted = numberFormatter(placeholder);
-    setFormattedNumber(placeholderFormatted);
+    setFormattedPlaceholderNumber(placeholderFormatted);
   }, []);
 
   return(
@@ -46,22 +59,18 @@ export function InputNumber({label, placeholder}: InputNumberProps) {
       <p>{label}</p>
 
       <input ref={inputRef} type="string"
-        placeholder={`   ${formattedNumber[0]}         ${formattedNumber[1]}               ${formattedNumber[2]}`}
+        placeholder={`   ${formattedPlaceholderNumber[0]}         ${formattedPlaceholderNumber[1]}               ${formattedPlaceholderNumber[2]}`}
         onChange={e => handleInputChange(e)}
         value={inputValue}
+        onKeyDown={handleInputKeyDown}
       />
 
       <NumberGroup className={inputValue == "" ? "placeholder-shown" : ""} onClick={handleInputClick}>
         <div className="number-segment country-number">
-          {/* {"+"} */}
-          {/* {"+" + formattedNumber[0]} */}
+          {"+"}
         </div>
-        <div className="number-segment ddd-number">
-          {/* {formattedNumber[1]} */}
-        </div>
-        <div className="number-segment friend-number">
-          {/* {formattedNumber[2]} */}
-        </div>
+        <div className="number-segment ddd-number"></div>
+        <div className="number-segment friend-number"></div>
       </NumberGroup>
     </Container>
   );

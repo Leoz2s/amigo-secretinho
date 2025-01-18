@@ -68,7 +68,7 @@ export const NumberGroup = styled.div`
     cursor: text;
 
     &.country-number {
-      text-align: center;
+      text-align: left;
     }
     &.ddd-number{
       text-align: center;
