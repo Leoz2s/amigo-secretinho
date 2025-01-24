@@ -3,7 +3,7 @@ import { PiCircleNotch, PiCheckCircle, PiXCircle } from "react-icons/pi";
 
 const statusOptions = ["waiting", "successful", "failed"];
 
-type RaffleStatusProps = {
+export type RaffleStatusProps = {
   status: string | "none" | "waiting" | "successful" | "failed";
 };
 

@@ -4,12 +4,12 @@ import { Container, NumberGroup } from "./styles";
 type InputNumberProps = {
   label: string;
   placeholder: string;
+  setFriendNumber: (number: React.SetStateAction<number>) => void;
 };
 
-export function InputNumber({label, placeholder}: InputNumberProps) {
+export function InputNumber({label, placeholder, setFriendNumber}: InputNumberProps) {
   const inputRef = useRef(null);
   const [formattedPlaceholderNumber, setFormattedPlaceholderNumber] = useState<string[]>([""]);
-  const [formattedNumber, setFormattedNumber] = useState<string>("");
   const [inputValue, setInputValue] = useState<string>("");
   const [lastKeyPressed, setLastKeyPressed] = useState<string>("");
 
@@ -32,7 +32,7 @@ export function InputNumber({label, placeholder}: InputNumberProps) {
     const inputValueAsNumber = Number(inputValueWithoutSpaces);
 
     if(e.target.value && inputValueWithoutSpaces.length <= 13 && false === Number.isNaN(inputValueAsNumber) && lastKeyPressed !== "Backspace") {
-      setFormattedNumber(inputValueWithoutSpaces);
+      setFriendNumber(Number(inputValueWithoutSpaces));
       const numberFormatted = numberFormatter(inputValueWithoutSpaces);
       setInputValue(`   ${numberFormatted[0]}         ${numberFormatted[1]}               ${numberFormatted[2]}`);
     };
@@ -43,7 +43,7 @@ export function InputNumber({label, placeholder}: InputNumberProps) {
     if( e.target && e.key === "Backspace") {
       const inputValueWithoutSpaces = e.target.value.replace(/\s/g, "");
       const inputValueWithDeletedNumber = inputValueWithoutSpaces.slice(0, -1);
-      setFormattedNumber(inputValueWithDeletedNumber);
+      setFriendNumber(Number(inputValueWithDeletedNumber));
       const numberFormatted = numberFormatter(inputValueWithDeletedNumber);
       setInputValue(`   ${numberFormatted[0]}         ${numberFormatted[1]}               ${numberFormatted[2]}`);
     };
