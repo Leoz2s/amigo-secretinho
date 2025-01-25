@@ -5,6 +5,7 @@ type FriendsProviderProps = {
 };
 
 type FriendObjectProps = {
+  id?: number;
   name: string; 
   suggestion: string; 
   email: string; 
@@ -19,26 +20,43 @@ export function FriendsProvider({children}: FriendsProviderProps) {
     const friends = localStorage.getItem("@amigoSecretinho:friends") ?? "";
     if(friends) {
       const parsedFriends = JSON.parse(friends);
-      newFriend = [...parsedFriends, {name, suggestion, email, number}]; 
+      const newID = parsedFriends.at(-1).id + 1;
+      newFriend = [...parsedFriends, {id: newID, name, suggestion, email, number}]; 
     } else {
-      newFriend = [{name, suggestion, email, number}];
+      newFriend = [{id: 1, name, suggestion, email, number}];
     };
     localStorage.setItem("@amigoSecretinho:friends", JSON.stringify(newFriend));
   };
 
-  function getFriend({name}: {name: string}) {
+  function getFriend(id: number) {
     const friends = localStorage.getItem('@amigoSecretinho:friends') ?? "";
     const parsedFriends = JSON.parse(friends);
-    const friendData = parsedFriends.filter((friend: {name: string}) => friend.name !== name);
-    return friendData;
+    const friendData = parsedFriends.filter((friend: FriendObjectProps) => friend.id == id);
+    return friendData[0] ?? null;
   };
 
-  function updateFriend() {
+  function updateFriend({id, name, suggestion, email, number}: FriendObjectProps) {
+    if(id) {
+      const friend = getFriend(id);
+      friend.name = name ?? friend.name;
+      friend.suggestion = suggestion ?? friend.suggestion;
+      friend.email = email ?? friend.email;
+      friend.number = number ?? friend.number;
 
+      const friends = localStorage.getItem('@amigoSecretinho:friends') ?? "";
+      const parsedFriends = JSON.parse(friends);
+      const friendsMinusUpdated = parsedFriends.filter((friend: FriendObjectProps) => friend.id !== id);
+      localStorage.setItem('@amigoSecretinho:friends', JSON.stringify([...friendsMinusUpdated, friend]));
+    } else {
+      return alert('Amigo não encontrado. Por favor, exclua-o e insira novamente os dados.');
+    };
   };
 
-  function deleteFriend() {
-    
+  function deleteFriend(id: number) {
+    const friends = localStorage.getItem('@amigoSecretinho:friends') ?? "";
+    const parsedFriends = JSON.parse(friends);
+    const friendRemoved = parsedFriends.filter((friend: FriendObjectProps) => friend.id !== id);
+    localStorage.setItem('@amigoSecretinho:friends', JSON.stringify(friendRemoved));
   };
 
   return(

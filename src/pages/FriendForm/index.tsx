@@ -10,43 +10,44 @@ import { Button } from '../../components/Button';
 
 export function FriendForm() {
   const navigate = useNavigate();
-  const {createFriend, getFriend} = useFriends();
+  const {createFriend, getFriend, updateFriend, deleteFriend} = useFriends();
   const [editingFriend, setEditingFriend ] = useState(false);
+  const [friendID, setFriendID] = useState(0);
   const [friendName, setFriendName] = useState("");
   const [friendSuggestion, setFriendSuggestion] = useState("");
   const [friendEmail, setFriendEmail] = useState("");
   const [friendNumber, setFriendNumber] = useState(0);
 
   function handleAddFriend() {
-    console.log(friendName, friendSuggestion, friendEmail, friendNumber);
     createFriend({name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
     navigate(-1);
   };
 
   function handleUpdateFriend() {
-    getFriend();
+    updateFriend({id: friendID, name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
     navigate(-1);
   };
 
   function handleRemoveFriend() {
-
+    deleteFriend(friendID);
     navigate(-1);
   };
 
   useEffect(() => {
+    const id = 1
 
-    const newFriend: boolean = true;
-
+    const newFriend:boolean = (id <= 0);
     if(newFriend == false) {
-      setEditingFriend(true);
-
-      setFriendName("Karl");
-      setFriendSuggestion("Suggestion");
-      setFriendEmail("karl@email.com");
-      setFriendNumber(0);
-    };
-
-
+      const friend = getFriend(id);
+      if(friend) {
+        setEditingFriend(true);
+        setFriendID(friend.id);
+        setFriendName(friend.name);
+        setFriendSuggestion(friend.suggestion);
+        setFriendEmail(friend.email);
+        setFriendNumber(friend.number);
+      }else {setEditingFriend(false)};
+    }else {setEditingFriend(false)};
   },[]);
 
   return(
