@@ -6,8 +6,10 @@ import { RaffleStatus, RaffleStatusProps } from '../../components/RaffleStatus';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFriends, FriendObjectProps } from '../../hooks/friends';
 
 export function Home() {
+  const {indexFriends} = useFriends();
   const [friends, setFriends] = useState<[string?, string?, string?]>([]);
   const [raffleState, setRaffleState] = useState<string>("none");
   const navigate =  useNavigate();
@@ -27,7 +29,8 @@ export function Home() {
   };
 
   useEffect(() => {
-    setFriends(["Gabriel", "Maria", "Paulo"]);
+    const friendsIndex = indexFriends();
+    setFriends(friendsIndex);
   }, [])
 
   return(
@@ -39,14 +42,8 @@ export function Home() {
         
         <FriendsBox>
           {
-            friends[0] && friends.map(friend => <FriendCard friendName={friend || "Error 404"} key={friend} />)
+            friends[0] && friends.map((friend) => <FriendCard friendName={friend.name || "Error 404"} friendID={friend.id} key={friend.id} />)
           }
-          <FriendCard friendName="Gabriel" />
-          <FriendCard friendName="Maria" />
-          <FriendCard friendName="Paulo" />
-          <FriendCard friendName="Gabriel" />
-          <FriendCard friendName="Maria" />
-          <FriendCard friendName="Paulo" />
           {
             friends[0] == undefined && <h3>Você não tem amigos ainda =(</h3>
           }

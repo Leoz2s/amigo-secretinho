@@ -9,6 +9,7 @@ export default () => {
       <Routes>
         <Route path={"/"} element={<Home/>} />
         <Route path={"/friend"} element={<FriendForm />} />
+        <Route path={"/friend/:id"} element={<FriendForm />} />
       </Routes>
     </BrowserRouter>
   )

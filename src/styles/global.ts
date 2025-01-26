@@ -20,6 +20,7 @@ export default createGlobalStyle`
 
   button, input {
     border: none;
+    background: none;
   }
 
   button:hover, a:hover {

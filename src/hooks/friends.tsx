@@ -4,7 +4,7 @@ type FriendsProviderProps = {
   children: React.JSX.Element;
 };
 
-type FriendObjectProps = {
+export type FriendObjectProps = {
   id?: number;
   name: string; 
   suggestion: string; 
@@ -35,6 +35,11 @@ export function FriendsProvider({children}: FriendsProviderProps) {
     return friendData[0] ?? null;
   };
 
+  function indexFriends() {
+    const friends = localStorage.getItem('@amigoSecretinho:friends') || "";
+    return JSON.parse(friends);
+  };
+
   function updateFriend({id, name, suggestion, email, number}: FriendObjectProps) {
     if(id) {
       const friend = getFriend(id);
@@ -60,7 +65,7 @@ export function FriendsProvider({children}: FriendsProviderProps) {
   };
 
   return(
-    <FriendsContext.Provider value={{createFriend, getFriend, updateFriend, deleteFriend}}>
+    <FriendsContext.Provider value={{createFriend, getFriend, indexFriends, updateFriend, deleteFriend}}>
       {children}
     </FriendsContext.Provider>
   );

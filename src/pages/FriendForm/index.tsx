@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFriends } from '../../hooks/friends';
 
-import { Container, Main } from './styles';
+import { Container, Main, ReturnAndTitle } from './styles';
 import { Header } from '../../components/Header';
 import { InputString } from '../../components/InputString';
 import { InputNumber } from '../../components/InputNumber';
 import { Button } from '../../components/Button';
+import { FaArrowLeft } from 'react-icons/fa';
 
 export function FriendForm() {
   const navigate = useNavigate();
@@ -17,6 +18,10 @@ export function FriendForm() {
   const [friendSuggestion, setFriendSuggestion] = useState("");
   const [friendEmail, setFriendEmail] = useState("");
   const [friendNumber, setFriendNumber] = useState(0);
+
+  function handleReturn() {
+    navigate(-1);
+  };
 
   function handleAddFriend() {
     createFriend({name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
@@ -55,7 +60,12 @@ export function FriendForm() {
       <Header />
 
       <Main>
-        <h2>{ editingFriend ? "Editar amigo" : "Adicionar novo amigo" }</h2>
+        <ReturnAndTitle>
+          <button onClick={handleReturn}>
+            <FaArrowLeft />
+          </button>
+          <h2>{ editingFriend ? "Editar amigo" : "Adicionar novo amigo" }</h2>
+        </ReturnAndTitle>
 
         <InputString label="Nome" placeholder='Nome do amigo' 
           onChange={e => setFriendName(e.target.value)} />

@@ -17,10 +17,20 @@ export const Main = styled.main`
   margin-top: 1.7rem;
 
   font-family: "Inria Sans", serif;
+  `;
+
+export const ReturnAndTitle = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 
   > h2 {
     font-size: 2.5rem;
     font-weight: 700;
+    color: ${({theme}) => theme.COLORS.TINTS.WHITE};
+  }
+
+  svg {
     color: ${({theme}) => theme.COLORS.TINTS.WHITE};
   }
 `;

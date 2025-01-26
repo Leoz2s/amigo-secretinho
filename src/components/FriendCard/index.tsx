@@ -1,15 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import { Container } from "./styles";
 import { PiPencilSimple } from "react-icons/pi";
 
 type FriendCardProps = {
-  friendName: string
-}
+  friendName: string;
+  friendID: number;
+};
 
-export function FriendCard({friendName}: FriendCardProps) {
+export function FriendCard({friendName, friendID}: FriendCardProps) {
+  const navigate = useNavigate();
+
+  function handleUpdateFriend() {
+    navigate(`/friend/${friendID}`);
+  };
+
   return(
     <Container>
       {friendName}
-      <PiPencilSimple />
+      <PiPencilSimple onClick={handleUpdateFriend} />
     </Container>
   );
 };
