@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useFriends } from '../../hooks/friends';
 
 import { Container, Main, ReturnAndTitle } from './styles';
@@ -11,6 +11,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 export function FriendForm() {
   const navigate = useNavigate();
+  const {id} = useParams();
   const {createFriend, getFriend, updateFriend, deleteFriend} = useFriends();
   const [editingFriend, setEditingFriend ] = useState(false);
   const [friendID, setFriendID] = useState(0);
@@ -24,8 +25,15 @@ export function FriendForm() {
   };
 
   function handleAddFriend() {
-    createFriend({name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
-    navigate(-1);
+    const validEmailFormatRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isEmailInValidFormat = validEmailFormatRegex.test(friendEmail);
+
+    if(friendName != "" && ((friendEmail != "" && isEmailInValidFormat) || (friendNumber != 0 && String(friendNumber).length == 13))) {
+      createFriend({name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
+      navigate(-1);
+    }else {
+      alert("Preencha o nome e pelo menos uma forma de contato para adicionar um amigo.");
+    };
   };
 
   function handleUpdateFriend() {
@@ -39,10 +47,7 @@ export function FriendForm() {
   };
 
   useEffect(() => {
-    const id = 1
-
-    const newFriend:boolean = (id <= 0);
-    if(newFriend == false) {
+    if(id) {
       const friend = getFriend(id);
       if(friend) {
         setEditingFriend(true);
@@ -68,13 +73,13 @@ export function FriendForm() {
         </ReturnAndTitle>
 
         <InputString label="Nome" placeholder='Nome do amigo' 
-          onChange={e => setFriendName(e.target.value)} />
+          onChange={setFriendName} value={friendName} />
         <InputString label="Sugestões de presente (Opcional)" placeholder='Sugestões ou dicas de presente' 
-          onChange={e  => setFriendSuggestion(e.target.value)} />
-        <InputString label="E-mail" placeholder='name@email.com' 
-          onChange={e  => setFriendEmail(e.target.value)} />
+          onChange={setFriendSuggestion} value={friendSuggestion} />
+        <InputString label="E-mail" placeholder='nome@email.com' 
+          onChange={setFriendEmail} value={friendEmail} />
         <InputNumber label="Número de Celular" placeholder={'5511987654321'} 
-          setFriendNumber={number => setFriendNumber(number)} />
+          setFriendNumber={number => setFriendNumber(number)} value={friendNumber} />
 
         <Button text={ editingFriend ? "Atualizar amigo" : "Adicionar amigo" }
           onClick={editingFriend ? handleUpdateFriend : handleAddFriend }

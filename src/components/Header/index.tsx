@@ -1,11 +1,18 @@
-import { Container, Logo } from "./styles";
+import { useNavigate } from "react-router-dom";
 
+import { Container, Logo } from "./styles";
 import { PiGift } from "react-icons/pi";
 
 export function Header() {
+  const navigate = useNavigate();
+
+  function handleRedirectToHome() {
+    navigate("/");
+  };
+
   return(
     <Container>
-      <Logo>
+      <Logo onClick={handleRedirectToHome} >
         <h1>Amigo Secretinho</h1>
         <PiGift />
       </Logo>

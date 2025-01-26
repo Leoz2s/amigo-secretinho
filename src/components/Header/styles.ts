@@ -14,6 +14,7 @@ export const Container = styled.header`
   > span {
     font-size: 1.6rem;
     color: ${({theme}) => theme.COLORS.TINTS.BLACK};
+    cursor: default;
   }
 `;
 
@@ -23,6 +24,7 @@ export const Logo = styled.div`
   gap: 1rem;
 
   padding: 1rem;
+  cursor: pointer;
 
   > h1 {
     margin: 0;
