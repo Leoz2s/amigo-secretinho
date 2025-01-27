@@ -17,7 +17,7 @@ export function FriendCard({friendName, friendID}: FriendCardProps) {
   return(
     <Container>
       {friendName}
-      <button aria-label={`Editar dados do amigo(a) ${friendName}`}
+      <button aria-label={`Editar dados do amigo(a) ${friendName}.`}
         onClick={handleUpdateFriend}
       >
         <PiPencilSimple />

@@ -30,7 +30,9 @@ export function Home() {
 
   useEffect(() => {
     const friendsIndex = indexFriends();
-    setFriends(friendsIndex);
+    if(friendsIndex) {
+      setFriends(friendsIndex);
+    };
   }, [])
 
   return(
