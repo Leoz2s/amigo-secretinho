@@ -21,7 +21,7 @@ export function FriendForm() {
   const [friendNumber, setFriendNumber] = useState(0);
 
   function handleReturn() {
-    navigate(-1);
+    navigate("/");
   };
 
   function handleAddFriend() {
@@ -30,7 +30,7 @@ export function FriendForm() {
 
     if(friendName != "" && ((friendEmail != "" && isEmailInValidFormat) || (friendNumber != 0 && String(friendNumber).length == 13))) {
       createFriend({name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
-      navigate(-1);
+      navigate("/");
     }else {
       alert("Preencha o nome e pelo menos uma forma de contato para adicionar um amigo.");
     };
@@ -38,12 +38,12 @@ export function FriendForm() {
 
   function handleUpdateFriend() {
     updateFriend({id: friendID, name: friendName, suggestion: friendSuggestion, email: friendEmail, number: friendNumber});
-    navigate(-1);
+    navigate("/");
   };
 
   function handleRemoveFriend() {
     deleteFriend(friendID);
-    navigate(-1);
+    navigate("/");
   };
 
   useEffect(() => {

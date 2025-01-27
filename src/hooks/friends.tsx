@@ -5,10 +5,10 @@ type FriendsProviderProps = {
 };
 
 export type FriendObjectProps = {
-  id?: number;
-  name: string; 
-  suggestion: string; 
-  email: string; 
+  id: number;
+  name: string;
+  suggestion: string;
+  email: string;
   number: number;
 };
 
@@ -20,11 +20,8 @@ export function FriendsProvider({children}: FriendsProviderProps) {
     const friends = localStorage.getItem("@amigoSecretinho:friends") ?? "";
     if(friends) {
       const parsedFriends = JSON.parse(friends);
-
-      const friendsIDs = parsedFriends.map((friend: FriendObjectProps) => friend.id);
-      const orderedFriendsByID = friendsIDs.sort((a: number, b: number) => a - b);
-      console.log(friendsIDs.sort())
-      const newID = orderedFriendsByID.at(-1) + 1;
+      const orderedFriendsByID = parsedFriends.sort((a: FriendObjectProps, b: FriendObjectProps) => a.id - b.id);
+      const newID = orderedFriendsByID.at(-1).id + 1;
       newFriend = [...parsedFriends, {id: newID, name, suggestion, email, number}]; 
     } else {
       newFriend = [{id: 1, name, suggestion, email, number}];
@@ -42,7 +39,7 @@ export function FriendsProvider({children}: FriendsProviderProps) {
   };
 
   function indexFriends() {
-    const friends = localStorage.getItem('@amigoSecretinho:friends') || "";
+    const friends = localStorage.getItem('@amigoSecretinho:friends') ?? "";
     if(friends) {
       return JSON.parse(friends);
     }else {return};
@@ -56,11 +53,12 @@ export function FriendsProvider({children}: FriendsProviderProps) {
         friend.suggestion = suggestion ?? friend.suggestion;
         friend.email = email ?? friend.email;
         friend.number = number ?? friend.number;
-  
-        const friends = localStorage.getItem('@amigoSecretinho:friends') ?? "";
-        const parsedFriends = JSON.parse(friends);
-        const friendsMinusUpdated = parsedFriends.filter((friend: FriendObjectProps) => friend.id !== id);
-        localStorage.setItem('@amigoSecretinho:friends', JSON.stringify([...friendsMinusUpdated, friend]));
+
+        const friends = indexFriends();
+        const friendsMinusOldData = friends.filter((friend: FriendObjectProps) => friend.id !== id);
+        const friendsUpdatedData = [...friendsMinusOldData, friend];
+        const sortedFriends = friendsUpdatedData.sort((a, b) => a.id - b.id);
+        localStorage.setItem('@amigoSecretinho:friends', JSON.stringify(sortedFriends));
       }
     } else { return alert('Amigo não encontrado. Por favor, exclua-o e insira novamente os dados.');
     };
