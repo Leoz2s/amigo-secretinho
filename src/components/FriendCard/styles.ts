@@ -20,9 +20,10 @@ export const Container = styled.div`
     background-color: ${({theme}) => theme.COLORS.THEME_800};
   }
 
-  > svg {
+  > button, svg {
     width: 2rem;
     height: 2rem;
+    color: ${({theme}) => theme.COLORS.THEME_100};
 
     &:hover {
       cursor: pointer;

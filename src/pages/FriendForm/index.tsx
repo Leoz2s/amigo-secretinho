@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useFriends } from '../../hooks/friends';
 
-import { Container, Main, ReturnAndTitle } from './styles';
+import { Container, Main, Form, ReturnAndTitle } from './styles';
 import { Header } from '../../components/Header';
 import { InputString } from '../../components/InputString';
 import { InputNumber } from '../../components/InputNumber';
@@ -65,31 +65,33 @@ export function FriendForm() {
       <Header />
 
       <Main>
-        <ReturnAndTitle>
-          <button onClick={handleReturn}>
-            <FaArrowLeft />
-          </button>
-          <h2>{ editingFriend ? "Editar amigo" : "Adicionar novo amigo" }</h2>
-        </ReturnAndTitle>
+        <Form>
+          <ReturnAndTitle>
+            <button onClick={handleReturn} aria-label='Retornar' >
+              <FaArrowLeft />
+            </button>
+            <h2>{ editingFriend ? "Editar amigo" : "Adicionar novo amigo" }</h2>
+          </ReturnAndTitle>
 
-        <InputString label="Nome" placeholder='Nome do amigo' 
-          onChange={setFriendName} value={friendName} />
-        <InputString label="Sugestões de presente (Opcional)" placeholder='Sugestões ou dicas de presente' 
-          onChange={setFriendSuggestion} value={friendSuggestion} />
-        <InputString label="E-mail" placeholder='nome@email.com' 
-          onChange={setFriendEmail} value={friendEmail} />
-        <InputNumber label="Número de Celular" placeholder={'5511987654321'} 
-          setFriendNumber={number => setFriendNumber(number)} value={friendNumber} />
+          <InputString label="Nome" placeholder='Nome do amigo' 
+            onChange={setFriendName} value={friendName} />
+          <InputString label="Sugestões de presente (Opcional)" placeholder='Sugestões ou dicas de presente' 
+            onChange={setFriendSuggestion} value={friendSuggestion} />
+          <InputString label="E-mail" placeholder='nome@email.com' 
+            onChange={setFriendEmail} value={friendEmail} />
+          <InputNumber label="Número de Celular" placeholder={'5511987654321'} 
+            setFriendNumber={number => setFriendNumber(number)} value={friendNumber} />
 
-        <Button text={ editingFriend ? "Atualizar amigo" : "Adicionar amigo" }
-          onClick={editingFriend ? handleUpdateFriend : handleAddFriend }
-        />
-        { 
-          editingFriend  && 
-          <Button text="Remover amigo" altButton 
-            onClick={handleRemoveFriend}
-          /> 
-        }
+          <Button text={ editingFriend ? "Atualizar amigo" : "Adicionar amigo" }
+            onClick={editingFriend ? handleUpdateFriend : handleAddFriend }
+          />
+          { 
+            editingFriend  && 
+            <Button text="Remover amigo" altButton 
+              onClick={handleRemoveFriend}
+            /> 
+          }
+        </Form>
       </Main>
     </Container>
   );

@@ -19,10 +19,17 @@ export const Main = styled.main`
   font-family: "Inria Sans", serif;
   `;
 
+export const Form = styled.form`
+  display: grid;
+  gap: 2.3rem;
+`;
+
 export const ReturnAndTitle = styled.div`
   display: flex;
   align-items: center;
-  gap: 2rem;
+  justify-content: center;
+
+  position: relative;
 
   > h2 {
     font-size: 2.5rem;
@@ -30,7 +37,10 @@ export const ReturnAndTitle = styled.div`
     color: ${({theme}) => theme.COLORS.TINTS.WHITE};
   }
 
-  svg {
+  > button {
     color: ${({theme}) => theme.COLORS.TINTS.WHITE};
+    position: absolute;
+    top: 25%;
+    left: 0%;
   }
 `;
